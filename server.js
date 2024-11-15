@@ -5,14 +5,20 @@ const connectDB = require("./Config/db");
 const ExpressError = require("./utils/ExpressError");  
 const userRoutes = require("./routes/userRoutes")
 const jobRoutes = require("./routes/jobRoutes")
+const cors = require('cors');
+
 
 dotenv.config(); 
 connectDB(); 
 
 const app = express();
 
+
+
+
 // Middleware
 app.use(express.json()); 
+app.use(cors());
 
 // Route handling
 app.use("/api/users", userRoutes);  

@@ -13,5 +13,5 @@ router.delete("/:id", isLoggedIn, isOwner, deleteJob);
 
 module.exports = router;
 
-console.log({ createJob, getJobs, updateJob, deleteJob });
+// console.log({ createJob, getJobs, updateJob, deleteJob });
 
