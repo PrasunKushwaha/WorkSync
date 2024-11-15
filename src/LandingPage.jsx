@@ -1,8 +1,7 @@
 // LandingPage.js
 import React from 'react';
 import { motion } from 'framer-motion';
-import Navbar from './Navbar';
-import Footer from './Footer';
+
 
 const LandingPage = () => {
   return (

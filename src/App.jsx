@@ -1,20 +1,19 @@
-// App.js
 import React, { useState, useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import LandingPage from './LandingPage';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import { Route, Routes } from 'react-router-dom';
 import JobSearch from './JobSearch';
 import JobDetails from './JobDetails';
 import JobPosting from './JobPosting';
 import CandidateReview from './CandidateReview';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Toggle dark mode based on the state
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
@@ -26,19 +25,39 @@ function App() {
   return (
     <div className={isDarkMode ? 'dark' : ''}>
       <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-<Routes>
-  <Route path='/' element={ <LandingPage />}> </Route>
-  <Route path='/login' element={ <Login />}> </Route>
-  <Route path='/signup' element={ <Signup />}></Route>
-  <Route path='/jobsearch' element={ <JobSearch/>}></Route>
-  <Route path='/jobdetails' element={ <JobDetails/>}></Route>
-  <Route path='/jobposting' element={ <JobPosting/>}></Route>
-  <Route path='/candidatereview' element={ <CandidateReview/>}></Route>
-</Routes>
-     
-     
-      
-      <Footer/>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/jobsearch' element={<JobSearch />} />
+        
+        {/* Protected routes */}
+        <Route 
+          path='/jobdetails' 
+          element={
+            <ProtectedRoute>
+              <JobDetails />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path='/jobposting' 
+          element={
+            <ProtectedRoute>
+              <JobPosting />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path='/candidatereview' 
+          element={
+            <ProtectedRoute>
+              <CandidateReview />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+      <Footer />
     </div>
   );
 }
