@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Login = () => {
   const location = useLocation(); // Get current location
@@ -135,13 +135,21 @@ const Login = () => {
             </div>
 
             <div className="flex items-center justify-center mt-4 text-sm text-gray-600">
-              <a href="#" className="hover:underline">
+             <Link to="/signup">
+             <button className="hover:underline">
                 Create Account
-              </a>
+              </button>
+             </Link> 
+
+            
               <span className="mx-2">|</span>
-              <a href="#" className="hover:underline">
+
+             <Link to="/forgot">
+             <button className="hover:underline">
                 Forgot Password
-              </a>
+              </button>
+             </Link>
+              
             </div>
           </form>
         </div>

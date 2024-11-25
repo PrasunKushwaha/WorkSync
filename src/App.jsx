@@ -11,6 +11,7 @@ import CandidateReview from "./CandidateReview";
 import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "./ProfilePage";
 import Sidebar from "./Sidebar";
+import ForgotPassword from "./ForgotPassword";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
         <Route
           path="/dash"
           element={

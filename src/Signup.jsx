@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useLocation } from "react-router-dom"; // Import hooks
+import { useNavigate, useLocation, Link } from "react-router-dom"; // Import hooks
 
 // Import AuthContext
 import { AuthContext } from "./context/AuthContext";
@@ -74,7 +74,7 @@ const Signup = () => {
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
+      <div className="flex items-center justify-center min-h-screen mt-10 bg-gray-100 dark:bg-gray-900 dark:text-white">
         <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
           <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">SIGN UP</h2>
 
@@ -146,7 +146,7 @@ const Signup = () => {
     type="password"
     name="confirmPassword"
     placeholder="Confirm Password"
-    className={`w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
+    className={`w-full px-4 py-2 mt-1 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 ${
       formik.touched.confirmPassword && formik.errors.confirmPassword
         ? "border-red-500 ring-red-500"
         : "focus:ring-blue-500"
@@ -164,7 +164,7 @@ const Signup = () => {
   <label className="block text-sm font-medium text-gray-600">Role *</label>
   <select
     name="role"
-    className={`w-full px-4 py-2 mt-1 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
+    className={`w-full px-4 py-2 mt-1 text-gray-600 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
       formik.touched.role && formik.errors.role
         ? "border-red-500 ring-red-500"
         : "focus:ring-blue-500"
@@ -173,9 +173,9 @@ const Signup = () => {
     onBlur={formik.handleBlur}
     value={formik.values.role}
   >
-    <option value="" label="Select a role" />
-    <option value="employer" label="Employer" />
-    <option value="candidate" label="Candidate" />
+    <option className="block text-sm font-medium text-gray-600 bg-gray-100" value="" label="Select a role" />
+    <option className="block text-sm font-medium text-gray-600 bg-gray-100" value="employer" label="Employer" />
+    <option className="block text-sm font-medium text-gray-600 bg-gray-100" value="candidate" label="Candidate" />
   </select>
   {formik.touched.role && formik.errors.role ? (
     <p className="mt-1 text-xs text-red-500">{formik.errors.role}</p>
@@ -189,6 +189,16 @@ const Signup = () => {
             >
               SIGN UP
             </button>
+
+
+             <div className="flex items-center justify-center mt-4 text-sm text-gray-600">
+             <Link to="/login">
+             <button className="hover:underline">
+               Already have an Account?
+              </button>
+             </Link>
+              
+            </div>
           </form>
         </div>
       </div>

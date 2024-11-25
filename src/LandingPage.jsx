@@ -1,6 +1,7 @@
 // LandingPage.js
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 
 const LandingPage = () => {
@@ -9,7 +10,7 @@ const LandingPage = () => {
     
 
       {/* Hero Banner */}
-       <section className="relative bg-blue-600 text-white text-center py-20 dark:bg-blue-800">
+       <section className="relative py-20 text-center text-white bg-blue-600 dark:bg-blue-800">
         <motion.div
           className="max-w-2xl mx-auto space-y-4"
           initial={{ opacity: 0, y: 50 }}
@@ -18,14 +19,15 @@ const LandingPage = () => {
         >
           <h1 className="text-4xl font-bold">Discover Your Next Career with AI</h1>
           <p className="text-lg">WorkSync connects talented job seekers with top companies using intelligent matching and personalized recommendations.</p>
-          <motion.a
-            href="/signup"
-            className="inline-block px-8 py-3 mt-4 text-lg font-semibold bg-white text-blue-600 rounded-lg hover:bg-blue-100"
+         
+         <Link to="/login"><motion.button
+            className="inline-block px-8 py-3 mt-4 text-lg font-semibold text-blue-600 bg-white rounded-lg hover:bg-blue-100"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Get Started
-          </motion.a>
+          </motion.button></Link>
+          
         </motion.div>
       </section>
 
@@ -92,14 +94,14 @@ const LandingPage = () => {
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white">Why Choose WorkSync?</h2>
           <div className="grid gap-8 sm:grid-cols-2">
             <motion.div
-              className="p-4 bg-gray-50 rounded-lg shadow-md"
+              className="p-4 rounded-lg shadow-md bg-gray-50"
               whileHover={{ scale: 1.05 }}
             >
               <h3 className="text-2xl font-semibold text-blue-600">For Job Seekers</h3>
               <p>Quickly discover relevant job opportunities, receive personalized job suggestions, and track your application status in real-time.</p>
             </motion.div>
             <motion.div
-              className="p-4 bg-gray-50 rounded-lg shadow-md"
+              className="p-4 rounded-lg shadow-md bg-gray-50"
               whileHover={{ scale: 1.05 }}
             >
               <h3 className="text-2xl font-semibold text-blue-600">For Employers</h3>
@@ -148,7 +150,7 @@ const LandingPage = () => {
 
             {/* How It Works Section */}
       <section id="how-it-works" className="py-16 bg-white dark:bg-gray-800">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div className="max-w-4xl mx-auto space-y-8 text-center">
           <h2 className="text-3xl font-bold text-gray-800 dark:text-white">How It Works</h2>
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
