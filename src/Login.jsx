@@ -23,7 +23,8 @@ const Login = () => {
         .min(6, "Password must be at least 6 characters")
         .required("Password is required"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: 
+    async (values) => {
       try {
         console.log("Attempting to log in with:", values);
     
@@ -40,7 +41,7 @@ const Login = () => {
           toast.success("Login successful!");
           const token = response.data.token; // Extract the token 
           localStorage.setItem("authToken", token);  // Store the token
-          const redirectPath = location.state?.from || "/";
+          const redirectPath = location.state?.from || "/dash";
           navigate(redirectPath); 
         } else {
           console.log("Unexpected response format:", response);
@@ -71,8 +72,8 @@ const Login = () => {
   return (
     <>
       <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
-        <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg dark:bg-gray-800">
-          <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-white">LOGIN</h2>
+        <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+          <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">LOGIN</h2>
 
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             <div>
@@ -123,7 +124,7 @@ const Login = () => {
             </button>
 
             <div className="flex items-center justify-center mt-4">
-              <span className="text-gray-500 text-sm">SIGN IN WITH: </span>
+              <span className="text-sm text-gray-500">SIGN IN WITH: </span>
               <button className="ml-2">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png"

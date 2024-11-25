@@ -1,21 +1,21 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from './context/AuthContext'; // Correct import of AuthContext
+import { AuthContext } from './context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   // Use AuthContext to get login status
-  const { isLoggedIn, setAuthToken } = useContext(AuthContext); // Access login status and setAuthToken function
+  const { isLoggedIn, setAuthToken } = useContext(AuthContext);
 
   const handleLogout = () => {
-    // Remove token from localStorage and update context
     localStorage.removeItem('authToken');
-    setAuthToken(null); // Set authToken to null to update context
-    window.location.href = '/'; // Optionally, redirect to homepage or login page
+    setAuthToken(null); // Update context
+    window.location.href = '/'; // Redirect to homepage or login page
   };
 
   return (
-    <header className="flex items-center justify-between p-6 bg-white shadow-md dark:bg-gray-800">
+    <header className="fixed top-0 left-0 z-50 flex items-center justify-between w-full p-4 bg-white shadow-md dark:bg-gray-800">
+      {/* Logo */}
       <Link to="/">
         <div className="flex items-center space-x-3">
           <img
@@ -26,25 +26,39 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           <span className="text-2xl font-bold text-blue-600 dark:text-blue-300">WorkSync</span>
         </div>
       </Link>
-      <nav className="hidden md:flex space-x-6 text-gray-700 dark:text-gray-300">
-        <a href="#how-it-works" className="hover:text-blue-600 dark:hover:text-blue-400">How It Works</a>
-        <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400">Features</a>
-        <a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400">About Us</a>
-        <a href="#contact" className="hover:text-blue-600 dark:hover:text-blue-400">Contact</a>
+
+      {/* Navigation Links */}
+      <nav className="hidden space-x-6 text-gray-700 md:flex dark:text-gray-300">
+        <a href="#how-it-works" className="hover:text-blue-600 dark:hover:text-blue-400">
+          How It Works
+        </a>
+        <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400">
+          Features
+        </a>
+        <a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400">
+          About Us
+        </a>
+        <a href="#contact" className="hover:text-blue-600 dark:hover:text-blue-400">
+          Contact
+        </a>
       </nav>
+
+      {/* User Actions and Dark Mode Toggle */}
       <div className="flex items-center space-x-4">
-        {/* Show Login and Sign Up buttons if not logged in */}
         {!isLoggedIn ? (
           <>
             <Link to="/login">
-              <button className="px-4 py-2 text-gray-700 rounded hover:bg-blue-100 dark:text-gray-300 dark:hover:bg-gray-700">Login</button>
+              <button className="px-4 py-2 text-gray-700 rounded hover:bg-blue-100 dark:text-gray-300 dark:hover:bg-gray-700">
+                Login
+              </button>
             </Link>
             <Link to="/signup">
-              <button className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">Sign Up</button>
+              <button className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                Sign Up
+              </button>
             </Link>
           </>
         ) : (
-          // Show Logout button if logged in
           <button
             onClick={handleLogout}
             className="px-4 py-2 text-white bg-red-600 rounded hover:bg-red-700"
@@ -53,7 +67,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
           </button>
         )}
 
-        {/* Toggle Switch for Dark Mode */}
+        {/* Dark Mode Toggle */}
         <label className="flex items-center space-x-2 cursor-pointer">
           <input
             type="checkbox"

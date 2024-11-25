@@ -1,5 +1,5 @@
-// JobSearch.js
 import React, { useState } from 'react';
+import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 
 const JobSearch = () => {
@@ -17,20 +17,21 @@ const JobSearch = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6 text-gray-800 dark:text-gray-100">
+    <div className="min-h-screen p-6 mt-12 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+      
       {/* Page Heading */}
-      <h1 className="text-3xl font-bold text-center mb-6">Job Search</h1>
+      <h1 className="mb-6 text-3xl font-bold text-center">Job Search</h1>
 
       {/* Search and Filter Section */}
-      <div className="max-w-4xl mx-auto mb-8 bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+      <div className="max-w-4xl p-6 mx-auto mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         {/* Search Bar */}
-        <div className="flex items-center space-x-4 mb-4">
+        <div className="flex items-center mb-4 space-x-4">
           <input
             type="text"
             placeholder="Search for jobs"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 bg-gray-100 border rounded-lg dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button className="px-4 py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
             Search
@@ -38,7 +39,7 @@ const JobSearch = () => {
         </div>
 
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <label className="block text-sm font-medium text-gray-600 dark:text-gray-400">Location</label>
             <input
@@ -46,7 +47,7 @@ const JobSearch = () => {
               placeholder="Location"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-4 py-2 mt-1 bg-gray-100 dark:bg-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 mt-1 bg-gray-100 border rounded-lg dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
@@ -56,7 +57,7 @@ const JobSearch = () => {
               placeholder="Job Title"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
-              className="w-full px-4 py-2 mt-1 bg-gray-100 dark:bg-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 mt-1 bg-gray-100 border rounded-lg dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
@@ -66,7 +67,7 @@ const JobSearch = () => {
               placeholder="Industry"
               value={industry}
               onChange={(e) => setIndustry(e.target.value)}
-              className="w-full px-4 py-2 mt-1 bg-gray-100 dark:bg-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 mt-1 bg-gray-100 border rounded-lg dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
@@ -74,7 +75,7 @@ const JobSearch = () => {
             <select
               value={experienceLevel}
               onChange={(e) => setExperienceLevel(e.target.value)}
-              className="w-full px-4 py-2 mt-1 bg-gray-100 dark:bg-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 mt-1 bg-gray-100 border rounded-lg dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select Level</option>
               <option value="Entry-level">Entry-level</option>
@@ -97,11 +98,11 @@ const JobSearch = () => {
               (experienceLevel === '' || job.experience === experienceLevel)
           )
           .map((job, index) => (
-            <div key={index} className="p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg">
+            <div key={index} className="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
               <h2 className="text-xl font-semibold">{job.title}</h2>
               <p className="text-gray-500 dark:text-gray-400">{job.location} - {job.industry} - {job.experience}</p>
               <p className="mt-2">{job.description}</p>
-              <button className="mt-4 px-4 py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <button className="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 Apply Now
               </button>
             </div>

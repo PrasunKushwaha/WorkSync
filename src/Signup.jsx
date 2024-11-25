@@ -15,7 +15,7 @@ const Signup = () => {
   const { setAuthToken } = useContext(AuthContext); // Access the context to set the auth token
 
   // Get the previous page (if any) to redirect after successful signup
-  const previousPage = location.state?.from || "/"; // Default to '/' if no previous page
+  const previousPage = location.state?.from || "/dash"; // Default to '/' if no previous page
 
   const formik = useFormik({
     initialValues: {
@@ -75,8 +75,8 @@ const Signup = () => {
     <>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
       <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-white">
-        <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-lg rounded-lg dark:bg-gray-800">
-          <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-white">SIGN UP</h2>
+        <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+          <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-white">SIGN UP</h2>
 
           <form onSubmit={formik.handleSubmit} className="space-y-4">
             {/* Form Fields */}
