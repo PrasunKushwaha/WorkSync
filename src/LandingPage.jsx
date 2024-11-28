@@ -10,7 +10,7 @@ const LandingPage = () => {
     
 
       {/* Hero Banner */}
-       <section className="relative py-20 text-center text-white bg-blue-600 dark:bg-blue-800">
+       <section className="relative py-20 mt-12 text-center text-white bg-blue-600 dark:bg-gray-700">
         <motion.div
           className="max-w-2xl mx-auto space-y-4"
           initial={{ opacity: 0, y: 50 }}
@@ -21,7 +21,7 @@ const LandingPage = () => {
           <p className="text-lg">WorkSync connects talented job seekers with top companies using intelligent matching and personalized recommendations.</p>
          
          <Link to="/login"><motion.button
-            className="inline-block px-8 py-3 mt-4 text-lg font-semibold text-blue-600 bg-white rounded-lg hover:bg-blue-100"
+            className="inline-block px-8 py-3 mt-4 text-lg font-semibold text-blue-600 bg-white rounded-lg hover:bg-blue-100 dark:text-white dark:bg-blue-600"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

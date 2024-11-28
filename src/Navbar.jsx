@@ -14,7 +14,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 z-50 flex items-center justify-between w-full p-4 bg-white shadow-md dark:bg-gray-800">
+    <header className="fixed top-0 left-0 z-50 flex items-center justify-between w-full p-4 bg-white shadow-md dark:bg-gray-800 ">
       {/* Logo */}
       <Link to="/">
         <div className="flex items-center space-x-3">
@@ -53,7 +53,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
               </button>
             </Link>
             <Link to="/signup">
-              <button className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+              <button className="px-4 py-2 text-gray-700 rounded hover:bg-blue-100 dark:text-gray-300 dark:hover:bg-gray-700">
                 Sign Up
               </button>
             </Link>

@@ -12,6 +12,9 @@ import ProtectedRoute from "./ProtectedRoute";
 import ProfilePage from "./ProfilePage";
 import Sidebar from "./Sidebar";
 import ForgotPassword from "./ForgotPassword";
+import Quiz from "./Quiz";
+import JobInterview from "./JobInterview";
+import Coach from "./Coach";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -38,6 +41,33 @@ function App() {
           element={
             <ProtectedRoute>
               <Sidebar />
+            </ProtectedRoute>
+          }
+        />
+
+         <Route
+          path="/pi"
+          element={
+            <ProtectedRoute>
+              <JobInterview/>
+            </ProtectedRoute>
+          }
+        />
+
+            <Route
+          path="/quiz"
+          element={
+            <ProtectedRoute>
+              <Quiz />
+            </ProtectedRoute>
+          }
+        />
+
+          <Route
+          path="/coach"
+          element={
+            <ProtectedRoute>
+              <Coach/>
             </ProtectedRoute>
           }
         />
