@@ -45,7 +45,7 @@ const Signup = () => {
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/users/register",
+          "https://worksyncdbackend.onrender.com/api/users/register",
           { name: values.name, email: values.email, password: values.password, role: values.role },
           { headers: { "Content-Type": "application/json" } }
         );
