@@ -6,7 +6,7 @@ const {
   changePassword,
   googleLogin,
   githubLogin,
-} = require("../controllers/userController");
+} = require("../Controllers/userController");
 const validateToken = require("../middleware/validateToken");
 const router = express.Router();
 
