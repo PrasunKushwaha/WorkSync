@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -6,12 +7,16 @@ const Footer = () => {
       <div className="max-w-4xl mx-auto space-y-4 text-center">
         {/* Navigation Links */}
         <nav className="flex justify-center space-x-6">
-          <a href="#about" className="transition hover:text-blue-500 dark:hover:text-blue-400">
+          <Link to="/about">
+          <button className="transition hover:text-blue-500 dark:hover:text-blue-400">
             About Us
-          </a>
-          <a href="#contact" className="transition hover:text-blue-500 dark:hover:text-blue-400">
+          </button></Link>
+          
+          <Link to="/contact">
+          <button className="transition hover:text-blue-500 dark:hover:text-blue-400">
             Contact
-          </a>
+          </button></Link>
+          
           <a href="#privacy" className="transition hover:text-blue-500 dark:hover:text-blue-400">
             Privacy Policy
           </a>
@@ -21,7 +26,7 @@ const Footer = () => {
         </nav>
 
         {/* Copyright Info */}
-        <p className="text-sm">&copy; 2023 WorkSync. All rights reserved.</p>
+        <p className="text-sm">&copy; 2024 WorkSync. All rights reserved.</p>
 
         {/* Social Media Links */}
         <div className="flex justify-center space-x-6">

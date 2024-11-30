@@ -29,18 +29,22 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
       {/* Navigation Links */}
       <nav className="hidden space-x-6 text-gray-700 md:flex dark:text-gray-300">
-        <a href="#how-it-works" className="hover:text-blue-600 dark:hover:text-blue-400">
+        <button className="hover:text-blue-600 dark:hover:text-blue-400">
           How It Works
-        </a>
-        <a href="#features" className="hover:text-blue-600 dark:hover:text-blue-400">
+        </button>
+        <button className="hover:text-blue-600 dark:hover:text-blue-400">
           Features
-        </a>
-        <a href="#about" className="hover:text-blue-600 dark:hover:text-blue-400">
+        </button>
+
+        <Link to="/about">
+        <button className="hover:text-blue-600 dark:hover:text-blue-400">
           About Us
-        </a>
-        <a href="#contact" className="hover:text-blue-600 dark:hover:text-blue-400">
+        </button></Link>
+        
+        <Link to="/contact">
+        <button className="hover:text-blue-600 dark:hover:text-blue-400">
           Contact
-        </a>
+        </button></Link>
       </nav>
 
       {/* User Actions and Dark Mode Toggle */}

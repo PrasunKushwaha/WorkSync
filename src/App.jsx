@@ -15,6 +15,8 @@ import ForgotPassword from "./ForgotPassword";
 import Quiz from "./Quiz";
 import JobInterview from "./JobInterview";
 import Coach from "./Coach";
+import About from "./About";
+import ContactUs from "./ContactUs";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -36,6 +38,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/forgot" element={<ForgotPassword />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route
           path="/dash"
           element={
