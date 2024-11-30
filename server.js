@@ -1,39 +1,29 @@
-// server.js
 const express = require("express");
 const dotenv = require("dotenv");
-const connectDB = require("./Config/db");
-const ExpressError = require("./utils/ExpressError");  
-const userRoutes = require("./routes/userRoutes")
-const jobRoutes = require("./routes/jobRoutes")
-const cors = require('cors');
+const connectDB = require(".//Config/db");
+const ExpressError = require("./utils/ExpressError");
+const userRoutes = require("./routes/userRoutes");
+const cors = require("cors");
 
-
-dotenv.config(); 
-connectDB(); 
+dotenv.config();
+connectDB();
 
 const app = express();
 
-
-
-
 // Middleware
-app.use(express.json()); 
+app.use(express.json());
 app.use(cors());
 
-// Route handling
-app.use("/api/users", userRoutes);  
-app.use("/api/jobs", jobRoutes);   
+// Routes
+app.use("/api/users", userRoutes);
 
-// Global Error Handler (handles errors thrown by ExpressError)
+// Global Error Handler
 app.use((err, req, res, next) => {
   if (err instanceof ExpressError) {
-    // Custom error response (if error is instance of ExpressError)
     return res.status(err.statusCode).json({ error: err.message });
   }
-
-  // Generic server error (for all other errors)
-  console.error(err);  // Log the error for debugging
-  res.status(500).json({ error: "Something went wrong!" });  // Send a 500 response
+  console.error(err);  // Log error for debugging
+  res.status(500).json({ error: "Something went wrong!" });
 });
 
 // Start the server
