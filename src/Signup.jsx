@@ -4,18 +4,19 @@ import * as Yup from "yup";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useLocation, Link } from "react-router-dom"; // Import hooks
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import { GoogleLogin } from "react-google-login"; // Google OAuth package
+import GitHubLogin from "react-github-login"; // GitHub OAuth package
 
 // Import AuthContext
 import { AuthContext } from "./context/AuthContext";
 
 const Signup = () => {
-  const navigate = useNavigate(); // Enable useNavigate hook
-  const location = useLocation(); // Enable useLocation hook
-  const { setAuthToken } = useContext(AuthContext); // Access the context to set the auth token
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { setAuthToken } = useContext(AuthContext);
 
-  // Get the previous page (if any) to redirect after successful signup
-  const previousPage = location.state?.from || "/dash"; // Default to '/' if no previous page
+  const previousPage = location.state?.from || "/dash";
 
   const formik = useFormik({
     initialValues: {
@@ -23,29 +24,19 @@ const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      role: "", // Initial value for role
+      role: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string()
-        .min(2, "Name must be at least 2 characters")
-        .required("Name is required"),
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-      password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
-        .required("Password is required"),
-      confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Confirm Password is required"),
-      role: Yup.string()
-        .oneOf(["employer", "candidate"], "Select a valid role")
-        .required("Role is required"),
+      name: Yup.string().min(2, "Name must be at least 2 characters").required("Name is required"),
+      email: Yup.string().email("Invalid email address").required("Email is required"),
+      password: Yup.string().min(6, "Password must be at least 6 characters").required("Password is required"),
+      confirmPassword: Yup.string().oneOf([Yup.ref("password"), null], "Passwords must match").required("Confirm Password is required"),
+      role: Yup.string().oneOf(["employer", "candidate"], "Select a valid role").required("Role is required"),
     }),
     onSubmit: async (values) => {
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/users/register",
+          "https://worksyncdbackend.onrender.com/api/users/register",
           { name: values.name, email: values.email, password: values.password, role: values.role },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -54,12 +45,11 @@ const Signup = () => {
         toast.success("User registered successfully!");
 
         const token = response.data.token;
-        setAuthToken(token); // Update the authToken in context
+        setAuthToken(token);
 
-        // Redirect to the previous page (or default to the homepage)
         setTimeout(() => {
-          navigate(previousPage); // Redirect to previous page after a successful registration
-        }, 2000); // Optional delay before redirecting
+          navigate(previousPage);
+        }, 2000);
       } catch (error) {
         const errorMsg = error.response?.data?.error || "Registration failed!";
         if (errorMsg === "User already exists") {
@@ -70,6 +60,42 @@ const Signup = () => {
       }
     },
   });
+
+  const handleGoogleResponse = async (response) => {
+    const { tokenId } = response;
+    try {
+      const res = await axios.post(
+        "https://worksyncdbackend.onrender.com/api/users/google-login",
+        { token: tokenId },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      console.log("Google Login Successful:", res.data);
+      toast.success("Google Login successful!");
+      const token = res.data.token;
+      setAuthToken(token);
+      navigate(previousPage);
+    } catch (error) {
+      toast.error("Google login failed!");
+    }
+  };
+
+  const handleGitHubResponse = async (response) => {
+    const { code } = response;
+    try {
+      const res = await axios.get(
+        `https://worksyncdbackend.onrender.com/api/users/github-login?code=${code}`
+      );
+
+      console.log("GitHub Login Successful:", res.data);
+      toast.success("GitHub Login successful!");
+      const token = res.data.token;
+      setAuthToken(token);
+      navigate(previousPage);
+    } catch (error) {
+      toast.error("GitHub login failed!");
+    }
+  };
 
   return (
     <>
@@ -100,89 +126,93 @@ const Signup = () => {
               ) : null}
             </div>
 
+            {/* Email Field */}
             <div>
-  <label className="block text-sm font-medium text-gray-600">Email *</label>
-  <input
-    type="email"
-    name="email"
-    placeholder="Email"
-    className={`w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
-      formik.touched.email && formik.errors.email
-        ? "border-red-500 ring-red-500"
-        : "focus:ring-blue-500"
-    }`}
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    value={formik.values.email}
-  />
-  {formik.touched.email && formik.errors.email ? (
-    <p className="mt-1 text-xs text-red-500">{formik.errors.email}</p>
-  ) : null}
-</div>
+              <label className="block text-sm font-medium text-gray-600">Email *</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                className={`w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
+                  formik.touched.email && formik.errors.email
+                    ? "border-red-500 ring-red-500"
+                    : "focus:ring-blue-500"
+                }`}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+              />
+              {formik.touched.email && formik.errors.email ? (
+                <p className="mt-1 text-xs text-red-500">{formik.errors.email}</p>
+              ) : null}
+            </div>
 
-<div>
-  <label className="block text-sm font-medium text-gray-600">Password *</label>
-  <input
-    type="password"
-    name="password"
-    placeholder="Password"
-    className={`w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
-      formik.touched.password && formik.errors.password
-        ? "border-red-500 ring-red-500"
-        : "focus:ring-blue-500"
-    }`}
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    value={formik.values.password}
-  />
-  {formik.touched.password && formik.errors.password ? (
-    <p className="mt-1 text-xs text-red-500">{formik.errors.password}</p>
-  ) : null}
-</div>
+            {/* Password Field */}
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Password *</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={`w-full px-4 py-2 mt-1 text-gray-700 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
+                  formik.touched.password && formik.errors.password
+                    ? "border-red-500 ring-red-500"
+                    : "focus:ring-blue-500"
+                }`}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+              />
+              {formik.touched.password && formik.errors.password ? (
+                <p className="mt-1 text-xs text-red-500">{formik.errors.password}</p>
+              ) : null}
+            </div>
 
-<div>
-  <label className="block text-sm font-medium text-gray-600">Confirm Password *</label>
-  <input
-    type="password"
-    name="confirmPassword"
-    placeholder="Confirm Password"
-    className={`w-full px-4 py-2 mt-1 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 ${
-      formik.touched.confirmPassword && formik.errors.confirmPassword
-        ? "border-red-500 ring-red-500"
-        : "focus:ring-blue-500"
-    }`}
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    value={formik.values.confirmPassword}
-  />
-  {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-    <p className="mt-1 text-xs text-red-500">{formik.errors.confirmPassword}</p>
-  ) : null}
-</div>
+            {/* Confirm Password Field */}
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Confirm Password *</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                className={`w-full px-4 py-2 mt-1 text-gray-700 border rounded-lg focus:outline-none focus:ring-2 ${
+                  formik.touched.confirmPassword && formik.errors.confirmPassword
+                    ? "border-red-500 ring-red-500"
+                    : "focus:ring-blue-500"
+                }`}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.confirmPassword}
+              />
+              {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                <p className="mt-1 text-xs text-red-500">{formik.errors.confirmPassword}</p>
+              ) : null}
+            </div>
 
-<div>
-  <label className="block text-sm font-medium text-gray-600">Role *</label>
-  <select
-    name="role"
-    className={`w-full px-4 py-2 mt-1 text-gray-600 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
-      formik.touched.role && formik.errors.role
-        ? "border-red-500 ring-red-500"
-        : "focus:ring-blue-500"
-    }`}
-    onChange={formik.handleChange}
-    onBlur={formik.handleBlur}
-    value={formik.values.role}
-  >
-    <option className="block text-sm font-medium text-gray-600 bg-gray-100" value="" label="Select a role" />
-    <option className="block text-sm font-medium text-gray-600 bg-gray-100" value="employer" label="Employer" />
-    <option className="block text-sm font-medium text-gray-600 bg-gray-100" value="candidate" label="Candidate" />
-  </select>
-  {formik.touched.role && formik.errors.role ? (
-    <p className="mt-1 text-xs text-red-500">{formik.errors.role}</p>
-  ) : null}
-</div>
+            {/* Role Field */}
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Role *</label>
+              <select
+                name="role"
+                className={`w-full px-4 py-2 mt-1 text-gray-600 bg-gray-100 border rounded-lg focus:outline-none focus:ring-2 ${
+                  formik.touched.role && formik.errors.role
+                    ? "border-red-500 ring-red-500"
+                    : "focus:ring-blue-500"
+                }`}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.role}
+              >
+                <option value="" label="Select a role" />
+                <option value="employer" label="Employer" />
+                <option value="candidate" label="Candidate" />
+              </select>
+              {formik.touched.role && formik.errors.role ? (
+                <p className="mt-1 text-xs text-red-500">{formik.errors.role}</p>
+              ) : null}
+            </div>
 
-
+            {/* Sign-up Button */}
             <button
               type="submit"
               className="w-full py-2 font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
@@ -190,14 +220,29 @@ const Signup = () => {
               SIGN UP
             </button>
 
+            {/* Google and GitHub OAuth Buttons */}
+            <div className="mt-4 space-y-2">
+              <GoogleLogin
+                clientId="YOUR_GOOGLE_CLIENT_ID"
+                buttonText="Login with Google"
+                onSuccess={handleGoogleResponse}
+                onFailure={(error) => toast.error("Google login failed")}
+                cookiePolicy="single_host_origin"
+                className="w-full py-2 bg-red-600 text-white rounded-lg"
+              />
+              <GitHubLogin
+                clientId="YOUR_GITHUB_CLIENT_ID"
+                onSuccess={handleGitHubResponse}
+                onFailure={(error) => toast.error("GitHub login failed")}
+                className="w-full py-2 bg-black text-white rounded-lg"
+              />
+            </div>
 
-             <div className="flex items-center justify-center mt-4 text-sm text-gray-600">
-             <Link to="/login">
-             <button className="hover:underline">
-               Already have an Account?
-              </button>
-             </Link>
-              
+            {/* Already have an account link */}
+            <div className="flex items-center justify-center mt-4 text-sm text-gray-600">
+              <Link to="/login">
+                <button className="hover:underline">Already have an Account?</button>
+              </Link>
             </div>
           </form>
         </div>

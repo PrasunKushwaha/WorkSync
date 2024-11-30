@@ -28,7 +28,7 @@ const Login = () => {
       try {
         console.log("Attempting to log in with:", values);
     
-        const response = await axios.post("http://localhost:5000/api/users/login", {
+        const response = await axios.post("https://worksyncdbackend.onrender.com/api/users/login", {
           email: values.email,
           password: values.password.trim(),  // Remove any extra spaces
           headers: { "Content-Type": "application/json" },

@@ -13,9 +13,47 @@ const PaymentGateway = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
-    alert("Payment Successful!");
+
+    if (paymentMethod === "creditCard") {
+      alert(
+        `Payment Successful! Details: \nCard Holder: ${formData.cardHolder}\nCard Number: ${formData.cardNumber}`
+      );
+    } else if (paymentMethod === "razorpay") {
+      try {
+        // Razorpay payment integration
+        const options = {
+          key: "rzp_test_UVwxEu8DrexcG2", // Replace with your Razorpay API Key
+          amount: 50000, // Amount in paise (e.g., 50000 paise = ₹500)
+          currency: "INR",
+          name: "WorkSync",
+          description: "Test Transaction",
+          handler: function (response) {
+            alert(
+              `Payment ID: ${response.razorpay_payment_id}\nPayment Successful!`
+            );
+          },
+          prefill: {
+            name: formData.cardHolder || "Your Name",
+            email: "user@example.com",
+            contact: "9999999999",
+          },
+          notes: {
+            address: "Corporate Office Address",
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+      } catch (error) {
+        console.error("Razorpay Error: ", error);
+        alert("Payment Failed!");
+      }
+    }
   };
 
   return (
@@ -25,7 +63,7 @@ const PaymentGateway = () => {
           Payment Gateway
         </h1>
 
-        <form onSubmit={handlePayment} className="space-y-4">
+        <form onSubmit={handlePayment} className="space-y-6">
           {/* Payment Method Selection */}
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -45,14 +83,14 @@ const PaymentGateway = () => {
               </button>
               <button
                 type="button"
-                onClick={() => setPaymentMethod("paypal")}
+                onClick={() => setPaymentMethod("razorpay")}
                 className={`px-4 py-2 rounded-lg ${
-                  paymentMethod === "paypal"
+                  paymentMethod === "razorpay"
                     ? "bg-blue-600 text-white"
                     : "bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                 }`}
               >
-                PayPal
+                Razorpay
               </button>
             </div>
           </div>
@@ -81,7 +119,7 @@ const PaymentGateway = () => {
                 name="cardHolder"
                 value={formData.cardHolder}
                 onChange={handleChange}
-                placeholder="Bhadri Prasad"
+                placeholder="John Doe"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
                 required
               />
@@ -119,10 +157,10 @@ const PaymentGateway = () => {
             </div>
           )}
 
-          {paymentMethod === "paypal" && (
+          {paymentMethod === "razorpay" && (
             <div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                You will be redirected to PayPal to complete the payment.
+                Complete your payment securely using Razorpay.
               </p>
             </div>
           )}
@@ -133,13 +171,6 @@ const PaymentGateway = () => {
             className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Confirm Payment
-          </button>
-          
-          <button
-            type="button"
-            className="w-full px-4 py-2 font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500"
-          >
-            Baad Me
           </button>
         </form>
       </div>
