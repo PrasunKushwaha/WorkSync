@@ -228,13 +228,13 @@ const Signup = () => {
                 onSuccess={handleGoogleResponse}
                 onFailure={(error) => toast.error("Google login failed")}
                 cookiePolicy="single_host_origin"
-                className="w-full py-2 bg-red-600 text-white rounded-lg"
+                className="w-full py-2 text-white bg-red-600 rounded-lg"
               />
               <GitHubLogin
                 clientId="YOUR_GITHUB_CLIENT_ID"
                 onSuccess={handleGitHubResponse}
                 onFailure={(error) => toast.error("GitHub login failed")}
-                className="w-full py-2 bg-black text-white rounded-lg"
+                className="w-full py-2 text-white bg-black rounded-lg"
               />
             </div>
 

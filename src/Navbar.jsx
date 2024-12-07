@@ -19,7 +19,7 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
       <Link to="/">
         <div className="flex items-center space-x-3">
           <img
-            src="https://cdn.discordapp.com/attachments/777095273490546712/1305324808535543818/WorkSync.png?ex=67329df6&is=67314c76&hm=dbeca3f5333bc3978d75cb0764688c2ce8c658d6f29e8a70267e3c704fc4502c&"
+            src="https://cdn.discordapp.com/attachments/777095273490546712/1305324808535543818/WorkSync.png?ex=6754e4f6&is=67539376&hm=171d2fa4e0723d2beda0cac20ffe383ce3c11a25d6784a0f0dda22051ed275e1&"
             alt="Logo"
             className="w-10 h-10"
           />
