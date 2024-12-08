@@ -20,11 +20,11 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
      
         <div className="flex items-center space-x-3">
            {isDarkMode ?  <img
-            src="\src\assets\Dark_Logo.jpg"
+            src=".\src\assets\Dark_Logo.jpg"
             alt="Logo"
             className="w-10 h-10"
           /> : <img
-            src="\src\assets\Light_Logo.jpg"
+            src=".\src\assets\Light_Logo.jpg"
             alt="Logo"
             className="w-10 h-10"
           />}
