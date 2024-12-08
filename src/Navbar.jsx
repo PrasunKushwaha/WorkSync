@@ -17,12 +17,19 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
     <header className="fixed top-0 left-0 z-50 flex items-center justify-between w-full p-4 bg-white shadow-md dark:bg-gray-800 ">
       {/* Logo */}
       <Link to="/">
+     
         <div className="flex items-center space-x-3">
-          <img
-            src="https://cdn.discordapp.com/attachments/777095273490546712/1305324808535543818/WorkSync.png?ex=6754e4f6&is=67539376&hm=171d2fa4e0723d2beda0cac20ffe383ce3c11a25d6784a0f0dda22051ed275e1&"
+           {isDarkMode ?  <img
+            src="src\assets\Dark_Logo.jpg"
             alt="Logo"
             className="w-10 h-10"
-          />
+          /> : <img
+            src="src\assets\Light_Logo.jpg"
+            alt="Logo"
+            className="w-10 h-10"
+          />}
+         
+          
           <span className="text-2xl font-bold text-blue-600 dark:text-blue-300">WorkSync</span>
         </div>
       </Link>
