@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import JobSearch from './JobSearch';
 import AppliedJobs from './AppliedJobs';
 import SettingsPage from './SettingsPage';
+import { LuChevronsRight } from "react-icons/lu";
 import {
   AiOutlineSearch,
   AiOutlineCheckCircle,
@@ -23,7 +24,7 @@ const Sidebar = () => {
         className="fixed z-30 p-2 mt-20 text-gray-800 bg-gray-100 rounded-md shadow-md dark:bg-gray-800 dark:text-gray-100 sm:hidden"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+        {isSidebarOpen ? <AiOutlineClose size={20} /> : <LuChevronsRight size={20} />}
       </button>
 
       {/* Sidebar */}
@@ -42,8 +43,8 @@ const Sidebar = () => {
                 onClick={() => setSelected("search")}
                 className={`flex items-center w-full px-4 py-2 text-left rounded-lg transition ${
                   selected === "search"
-                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-300"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white"
                 }`}
               >
                 <AiOutlineSearch size={20} className="mr-3" />
@@ -55,8 +56,8 @@ const Sidebar = () => {
                 onClick={() => setSelected("applied")}
                 className={`flex items-center w-full px-4 py-2 text-left rounded-lg transition ${
                   selected === "applied"
-                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-300"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white"
                 }`}
               >
                 <AiOutlineCheckCircle size={20} className="mr-3" />
@@ -68,8 +69,8 @@ const Sidebar = () => {
                 onClick={() => setSelected("learn")}
                 className={`flex items-center w-full px-4 py-2 text-left rounded-lg transition ${
                   selected === "learn"
-                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-300"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white "
                 }`}
               >
                 <AiOutlineBook size={20} className="mr-3" />
@@ -81,8 +82,8 @@ const Sidebar = () => {
                 onClick={() => setSelected("settings")}
                 className={`flex items-center w-full px-4 py-2 text-left rounded-lg transition ${
                   selected === "settings"
-                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-white"
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                    ? "bg-blue-100 text-blue-700 dark:bg-gray-700 dark:text-blue-300"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700 dark:text-white "
                 }`}
               >
                 <AiOutlineSetting size={20} className="mr-3" />
