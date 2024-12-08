@@ -4,11 +4,13 @@ import * as Yup from "yup";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import { useNavigate, useLocation, Link } from "react-router-dom";
+import { AuthContext } from "./context/AuthContext"; 
+import { useContext } from "react";
 
 const Login = () => {
   const location = useLocation(); // Get current location
   const navigate = useNavigate();
-
+const { setAuthToken } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
@@ -40,6 +42,7 @@ const Login = () => {
         if (response.status === 200 && response.data) {
           toast.success("Login successful!");
           const token = response.data.token; // Extract the token 
+           setAuthToken(token)
           localStorage.setItem("authToken", token);  // Store the token
           const redirectPath = location.state?.from || "/dash";
           navigate(redirectPath); 
