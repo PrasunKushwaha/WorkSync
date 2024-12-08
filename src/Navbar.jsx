@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
 import { Link as ScrollLink} from 'react-scroll';
+import DarkLogo from './assets/Dark_Logo.jpg'
+import LightLogo from './assets/Light_Logo.jpg'
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   // Use AuthContext to get login status
@@ -20,11 +22,11 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
      
         <div className="flex items-center space-x-3">
            {isDarkMode ?  <img
-            src="./assets/Dark_Logo.jpg"
+            src={DarkLogo}
             alt="Logo"
             className="w-10 h-10"
           /> : <img
-            src="./assets/Light_Logo.jpg"
+            src={LightLogo}
             alt="Logo"
             className="w-10 h-10"
           />}
