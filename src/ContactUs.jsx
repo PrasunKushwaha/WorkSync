@@ -35,6 +35,15 @@ const ContactUs = () => {
                 mohdsuhail.istiyak@gmail.com
               </a>
             </p>
+             <p className="text-gray-600 dark:text-gray-400">
+              Puja Kumari:{" "}
+              <a
+                href="mailto:mohdsuhail.istiyak@gmail.com"
+                className="text-blue-600 hover:underline dark:text-blue-400"
+              >
+                pujamehtabth808@gmail.com
+              </a>
+            </p>
           </div>
 
           {/* Mobile Section */}

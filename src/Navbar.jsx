@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link as ScrollLink} from 'react-scroll';
 
 const Navbar = ({ isDarkMode, toggleDarkMode }) => {
   // Use AuthContext to get login status
@@ -29,12 +29,17 @@ const Navbar = ({ isDarkMode, toggleDarkMode }) => {
 
       {/* Navigation Links */}
       <nav className="hidden space-x-6 text-gray-700 md:flex dark:text-gray-300">
+         <ScrollLink to="how-it-works" smooth={true} duration={500}>
         <button className="hover:text-blue-600 dark:hover:text-blue-400">
           How It Works
         </button>
+        </ScrollLink>
+        
+        <ScrollLink to="features" smooth={true} duration={500}>
         <button className="hover:text-blue-600 dark:hover:text-blue-400">
           Features
         </button>
+        </ScrollLink>
 
         <Link to="/about">
         <button className="hover:text-blue-600 dark:hover:text-blue-400">

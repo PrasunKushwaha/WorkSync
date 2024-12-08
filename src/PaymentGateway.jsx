@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PaymentGateway = () => {
+   const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState("creditCard");
   const [formData, setFormData] = useState({
     cardNumber: "",
@@ -30,9 +32,10 @@ const PaymentGateway = () => {
           name: "WorkSync",
           description: "Test Transaction",
           handler: function (response) {
-            alert(
-              `Payment ID: ${response.razorpay_payment_id}\nPayment Successful!`
-            );
+            // alert(
+            //   `Payment ID: ${response.razorpay_payment_id}\nPayment Successful!`
+            // );
+           navigate("/paid");
           },
           prefill: {
             name: formData.cardHolder || "Your Name",
@@ -119,7 +122,7 @@ const PaymentGateway = () => {
                 name="cardHolder"
                 value={formData.cardHolder}
                 onChange={handleChange}
-                placeholder="John Doe"
+                placeholder="Bhadri Prashad"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300"
                 required
               />
