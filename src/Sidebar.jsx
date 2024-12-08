@@ -7,17 +7,34 @@ import {
   AiOutlineCheckCircle,
   AiOutlineSetting,
   AiOutlineBook,
+  AiOutlineMenu,
+  AiOutlineClose,
 } from 'react-icons/ai';
 import PaymentGateway from './PaymentGateway';
 
 const Sidebar = () => {
   const [selected, setSelected] = useState("applied");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen lex bg-gray-50 dark:bg-gray-900">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Mobile Toggle Button */}
+      <button
+        className="fixed z-30 p-2 mt-20 text-gray-800 bg-gray-100 rounded-md shadow-md dark:bg-gray-800 dark:text-gray-100 sm:hidden"
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+      >
+        {isSidebarOpen ? <AiOutlineClose size={24} /> : <AiOutlineMenu size={24} />}
+      </button>
+
       {/* Sidebar */}
-      <div className="fixed top-0 left-0 z-0 w-64 h-full p-6 space-y-4 text-gray-800 bg-gray-100 border-r dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700">
-        <h2 className="mb-8 text-2xl font-bold text-center">Job Portal</h2>
+      <div
+        className={`fixed top-0 left-0 z-20 h-full bg-gray-100 border-r dark:bg-gray-800 dark:border-gray-700 transition-transform transform ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } sm:translate-x-0 sm:w-64 p-6 space-y-4`}
+      >
+        <h2 className="mb-8 text-2xl font-bold text-center text-gray-800 dark:text-gray-100">
+          Job Portal
+        </h2>
         <nav>
           <ul className="space-y-4">
             <li>
@@ -77,10 +94,10 @@ const Sidebar = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-6 ml-64">
+      <div className="flex-1 p-6 sm:ml-64">
         {selected === "search" && <JobSearch />}
         {selected === "applied" && <AppliedJobs />}
-        {selected === "learn" && <PaymentGateway/>}
+        {selected === "learn" && <PaymentGateway />}
         {selected === "settings" && <SettingsPage />}
       </div>
     </div>
