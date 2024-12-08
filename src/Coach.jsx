@@ -17,7 +17,7 @@ function Coach() {
 
     try {
       const response = await axios({
-        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDJm_JZZn8ZWwZIdTistdc33HDb-wY8pqw",
+        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAN2rgHo0T42fsEeBVRDLI0M7s7zOfYHzo",
         method: "post",
         headers: {
           'Content-Type': 'application/json'

@@ -17,6 +17,7 @@ import JobInterview from "./JobInterview";
 import Coach from "./Coach";
 import About from "./About";
 import ContactUs from "./ContactUs";
+import Paid from "./Paid";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -72,6 +73,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Coach/>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/paid"
+          element={
+            <ProtectedRoute>
+              <Paid/>
             </ProtectedRoute>
           }
         />

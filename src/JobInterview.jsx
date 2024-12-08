@@ -27,7 +27,7 @@ function JobInterview() {
 
     try {
       const response = await axios({
-        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyDJm_JZZn8ZWwZIdTistdc33HDb-wY8pqw",
+        url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyAN2rgHo0T42fsEeBVRDLI0M7s7zOfYHzo",
         method: "post",
         data: {
           contents: [{ parts: [{ text: formattedQuestionTemplate }] }],
@@ -117,7 +117,7 @@ function JobInterview() {
         {interviewFinished && (
           <div className="text-center animate__animated animate__fadeIn">
             <p className="text-2xl font-semibold text-green-400">Interview Finished</p>
-            <pre className="p-4 mt-4 text-left bg-gray-800 rounded">{report}</pre>
+            <pre className="p-4 mt-4 text-left break-all whitespace-pre-line bg-gray-800 rounded">{report}</pre>
             <div className="p-4 mt-4 bg-gray-700 border-2 border-red-600 rounded-lg">
               <h3 className="text-xl font-semibold text-red-400">Areas to Improve:</h3>
               <ul className="list-disc list-inside">

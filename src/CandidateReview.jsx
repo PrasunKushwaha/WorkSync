@@ -21,12 +21,12 @@ const CandidateReview = () => {
   ]);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6 text-gray-800 dark:text-gray-100">
-      <div className="max-w-5xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg p-8">
-        <h1 className="text-3xl font-bold text-center mb-6">Candidate Review</h1>
+    <div className="min-h-screen p-6 text-gray-800 bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+      <div className="max-w-5xl p-8 mx-auto mt-24 bg-white rounded-lg shadow-md dark:bg-gray-800">
+        <h1 className="mb-6 text-3xl font-bold text-center">Candidate Review</h1>
         <div className="space-y-6">
           {candidates.map((candidate) => (
-            <div key={candidate.id} className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg shadow">
+            <div key={candidate.id} className="p-4 rounded-lg shadow bg-gray-50 dark:bg-gray-700">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h2 className="text-xl font-semibold">{candidate.name}</h2>

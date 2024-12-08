@@ -128,18 +128,18 @@ function Quiz() {
   };
 
   return (
-    <div className="min-h-screen p-5 bg-white">
-      <div className="max-w-4xl p-6 mx-auto mt-24 bg-gray-100 rounded-lg shadow-md animate__animated animate__fadeIn">
-        <h1 className="mb-6 text-3xl font-extrabold text-center">Quiz Generator</h1>
+    <div className="min-h-screen p-5 bg-gray-900">
+      <div className="max-w-4xl p-6 mx-auto mt-24 bg-gray-800 rounded-lg shadow-md animate__animated animate__fadeIn">
+        <h1 className="mb-6 text-3xl font-extrabold text-center text-indigo-400">Quiz Generator</h1>
         <form onSubmit={generateAnswer} className="mb-6 space-y-4">
           <div className="flex justify-between">
             <div className="w-1/2 pr-2">
-              <label htmlFor="category" className="block text-sm font-medium text-gray-800">Category</label>
+              <label htmlFor="category" className="block text-sm font-medium text-gray-300">Category</label>
               <select
                 name="category"
                 id="category"
                 onChange={handleCategoryChange}
-                className="block w-full mt-1 text-gray-700 border-gray-600 rounded-md shadow-sm focus:border-indigo-400 focus:ring-indigo-400 sm:text-sm"
+                className="block w-full mt-1 text-white bg-gray-700 border-gray-600 rounded-md shadow-sm focus:border-indigo-400 focus:ring-indigo-400 sm:text-sm"
               >
                 <option value="aptitude">Aptitude & Reasoning</option>
                 <option value="civil">Civil Engineering</option>
@@ -149,12 +149,12 @@ function Quiz() {
               </select>
             </div>
             <div className="w-1/2 pl-2">
-              <label htmlFor="skillLevel" className="block text-sm font-medium text-gray-800">Skill Level</label>
+              <label htmlFor="skillLevel" className="block text-sm font-medium text-gray-300">Skill Level</label>
               <select
                 name="skillLevel"
                 id="skillLevel"
                 onChange={handleSkillLevelChange}
-                className="block w-full mt-1 text-gray-700 border-gray-600 rounded-md shadow-sm focus:border-indigo-400 focus:ring-indigo-400 sm:text-sm"
+                className="block w-full mt-1 text-white bg-gray-700 border-gray-600 rounded-md shadow-sm focus:border-indigo-400 focus:ring-indigo-400 sm:text-sm"
               >
                 <option value="beginner">Beginner</option>
                 <option value="intermediate">Intermediate</option>
